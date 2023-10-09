@@ -18,7 +18,7 @@ const Input = ({ label, placeholder, children, type, ...props }) => {
         {label}
       </label>
       <div className="relative mb-6">
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+        <div className="absolute top-2.5 flex items-center pl-3">
           {type !== "password" ? (
             children
           ) : (
@@ -39,7 +39,7 @@ const Input = ({ label, placeholder, children, type, ...props }) => {
           {...filed}
         />
         {meta.touched && meta.error ? (
-          <span className="font-['Roboto'] text-red-600 font-medium text-sm">{meta.error}</span>
+          <p className="font-['Roboto'] text-red-600 font-medium text-sm mt-2">{meta.error}</p>
         ) : null}
       </div>
     </>
