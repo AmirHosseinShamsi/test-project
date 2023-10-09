@@ -1,39 +1,20 @@
 "use client";
-import React, {useEffect, useState} from 'react';
-import {useAuth} from "contextApi/AuthContext";
+import React, { useEffect, useState } from "react";
+import { useAuth } from "contextApi/AuthContext";
+import SubmitButton from "components/login-page/SubmitButton";
+import Link from "next/link";
 
 const Page = () => {
-    const {data} = useAuth();
-    const ticket = data.ticket;
-    const [object , setObject] = useState({});
-    async function postRequest(url) {
-        try {
-            const response = await fetch(
-                url,
-                {
-                    method:"GET",
-                    headers: { "Content-Type": "application/json", charset: "utf-8" , Authorization: `Bearer ${ticket}`,},
-                },
-            );
-            if (!response.ok) {
-                throw new Error(`failed to fetch data ${response.status}`)
-            }
-            const object = await response.json();
-            setObject(object);
-            console.log(object);
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
-    useEffect(() => {
-        const fetchData = async () => {
-            await postRequest("http://shserver.top:8080/test/users/getData");
-        };
-
-        fetchData().then(r => console.log(r));
-    }, []);
-    return <div>{object.result}</div>;
+  return (
+    <div className="flex justify-center mt-16 space-x-8">
+      <Link href="/test/page1" className="w-1/4">
+        <SubmitButton text="page1" type="button" />
+      </Link>
+      <Link href="/test/page2" className="w-1/4">
+        <SubmitButton text="page2" type="button" />
+      </Link>
+    </div>
+  );
 };
 
 export default Page;
