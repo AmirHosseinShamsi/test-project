@@ -1,12 +1,17 @@
 "use client";
-import React, {useState} from "react";
-import {EyeIcon, EyeSlashIcon} from "@heroicons/react/20/solid";
+import React, { useState } from "react";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
+import { useField } from "formik";
 
-const Input = ({ label, placeholder, children , type}) => {
-    const [isShowPassword , setShowPassword] = useState(false);
-    const changeShowPassword = () => {
-        setShowPassword(!isShowPassword);
-    };
+const Input = ({ label, placeholder, children, type, ...props }) => {
+  //getting validation error
+  const [filed, meta] = useField(props);
+
+  //show password
+  const [isShowPassword, setShowPassword] = useState(false);
+  const changeShowPassword = () => {
+    setShowPassword(!isShowPassword);
+  };
   return (
     <>
       <label className="block mb-2 text-sm font-medium text-gray-900">
@@ -30,7 +35,12 @@ const Input = ({ label, placeholder, children , type}) => {
           type={type === "password" && isShowPassword ? "text" : type}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5 focus:outline-0"
           placeholder={placeholder}
+          {...props}
+          {...filed}
         />
+        {meta.touched && meta.error ? (
+          <span className="font-['Roboto'] text-red-600 font-medium text-sm">{meta.error}</span>
+        ) : null}
       </div>
     </>
   );
