@@ -1,6 +1,4 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { useAuth } from "contextApi/AuthContext";
+import React from "react";
 import SubmitButton from "components/login-page/SubmitButton";
 import Link from "next/link";
 
