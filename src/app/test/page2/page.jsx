@@ -45,8 +45,9 @@ const Page = () => {
   }, []);
 
   const CopyCodes = (element) => {
+    let editor = document.getElementById("editor");
     navigator.clipboard
-      .writeText(element.target.value.innerhtml)
+      .writeText(editor.innerText)
       .then(() => {
         alert("copied");
       })
@@ -54,34 +55,36 @@ const Page = () => {
         alert("not copied");
       });
   };
-
-  const Parts = object.split("```");
-  let text = Parts[0];
-  let code = Parts.slice(1).join("");
   return (
-    <div className="w-full flex justify-center h-screen items-center">
-          <div className="w-1/2 bg-gray-200 rounded-xl py-10">
-            <div>
-              <p className="text-sm"></p>
-              <div dir="rtl">
-                <button className="px-10 py-5 bg-indigo-500 text-white font-['Roboto']" onClick={CopyCodes}>
-                  copy
-                </button>
-                <pre
-                  className="w-full overflow-auto bg-gray-50 rounded-xl border border-gray-500 py-0 flex flex-col"
-                  dir="ltr"
-                >
-                  <code className="whitespace-break-spaces">
-                    &lt;input type="text" class="form-control"
-                    placeholder="name@example.com"/&gt; &lt;input type="text"
-                    class="form-control form-control-solid"
-                    placeholder="name@example.com"/&gt;
-                  </code>
-                </pre>
-              </div>
-            </div>
+    <div className="w-full flex flex-col justify-center h-screen items-center">
+      <div className="px-5">
+        {object}
+      </div>
+      <div className="w-1/2 bg-gray-200 rounded-xl py-10">
+        <div>
+          <p className="text-sm"></p>
+          <div dir="rtl">
+            <button
+              className="px-10 py-2 rounded-lg bg-indigo-500 text-white font-['Roboto']"
+              onClick={CopyCodes}
+            >
+              copy
+            </button>
+            <pre
+              className="w-full overflow-auto bg-gray-50 rounded-xl border border-gray-500 py-0 flex flex-col"
+              dir="ltr"
+            >
+              <code className="whitespace-break-spaces" id="editor">
+                &lt;input type="text" class="form-control"
+                placeholder="name@example.com"/&gt; &lt;input type="text"
+                class="form-control form-control-solid"
+                placeholder="name@example.com"/&gt;
+              </code>
+            </pre>
           </div>
         </div>
+      </div>
+    </div>
   );
 };
 

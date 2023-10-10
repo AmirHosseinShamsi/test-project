@@ -35,7 +35,7 @@ const Page = () => {
 
         fetchData().then((r) => console.log(r));
     }, []);
-    return <div>{object.result}</div>;
+    return <div className="mt-16 ml-16">{object.result}</div>;
 };
 
 export default Page;
